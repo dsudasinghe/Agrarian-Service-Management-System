@@ -19,7 +19,7 @@ const Signup = () => {
     nic: "",
     email: "",
     password: "",
-    password_confirmation: ""
+    password_confirmation: "",
   });
 
   const [error, setError] = useState("");
@@ -34,14 +34,12 @@ const Signup = () => {
     e.preventDefault();
     try {
       console.log(data);
-      if(data.password_confirmation===data.password){
+      if (data.password_confirmation === data.password) {
         await axios.post(getUrl("users"), data);
         navigate("/login");
-      }else{
-        setError('Password and confirmation does not same');
+      } else {
+        setError("Password and confirmation does not same");
       }
-
-     
     } catch (error) {
       console.log(error);
       if (
@@ -62,7 +60,7 @@ const Signup = () => {
             sm={12}
             className="shadow-sm text-success mt-5 p-4 text-center text-center rounded"
           >
-            <h4 className=" text-success pb-5">Authentication</h4>
+            <h4 className=" text-success pb-5">EasyAgro User SignUp</h4>
 
             <Form className="text-start" onSubmit={handleSubmit}>
               <Form.Group className="mb-3" controlId="loginNICGroup">
@@ -111,7 +109,10 @@ const Signup = () => {
                   placeholder="Password"
                 />
               </Form.Group>
-              <Form.Group className="mb-3" controlId="loginPasswordConfirmationGroup">
+              <Form.Group
+                className="mb-3"
+                controlId="loginPasswordConfirmationGroup"
+              >
                 <Form.Label>Retype Password</Form.Label>
                 <Form.Control
                   onChange={handleChange}

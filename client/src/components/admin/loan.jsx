@@ -105,7 +105,7 @@ const Loan = () => {
     });
   };
 
-  const handleApprove = async (record,user) => {
+  const handleApprove = async (record, user) => {
     Swal.fire({
       title: "Are you sure to approve this record",
       icon: "warning",
@@ -122,7 +122,7 @@ const Loan = () => {
     });
   };
 
-  const handleReject = async (record,user) => {
+  const handleReject = async (record, user) => {
     Swal.fire({
       title: "Are you sure to reject this record",
       icon: "warning",
@@ -149,7 +149,7 @@ const Loan = () => {
             sm={12}
             className="shadow-sm text-success mt-5 p-4 rounded"
           >
-            <h6 className=" text-success pb-4">Categories List</h6>
+            <h6 className=" text-success pb-4">Loan List</h6>
             <Table striped bordered hover>
               <thead>
                 <tr>
@@ -191,7 +191,7 @@ const Loan = () => {
                           className="mx-1"
                           variant="primary"
                           size="sm"
-                          onClick={() => handleApprove(item._id,item.user)}
+                          onClick={() => handleApprove(item._id, item.user)}
                         >
                           Approve
                         </Button>
@@ -199,7 +199,7 @@ const Loan = () => {
                           className="mx-1"
                           variant="primary"
                           size="sm"
-                          onClick={() => handleReject(item._id,item.user)}
+                          onClick={() => handleReject(item._id, item.user)}
                         >
                           Reject
                         </Button>

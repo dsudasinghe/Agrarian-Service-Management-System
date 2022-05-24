@@ -1,6 +1,6 @@
 import { useState, React } from "react";
 import { Link } from "react-router-dom";
-import Notiflix from 'notiflix';
+import Notiflix from "notiflix";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
@@ -30,7 +30,7 @@ const Login = () => {
     e.preventDefault();
     try {
       Notiflix.Loading.standard();
-      const { data: res } = await axios.post(getUrl("auth"), data );
+      const { data: res } = await axios.post(getUrl("auth"), data);
       Notiflix.Loading.remove();
       console.log(res.data.user);
       console.log(res.message);
@@ -59,7 +59,7 @@ const Login = () => {
             sm={12}
             className="shadow-sm text-success mt-5 p-4 text-center text-center rounded"
           >
-            <h4 className=" text-success pb-5">Authentication</h4>
+            <h4 className=" text-success pb-5">EasyAgro User Login</h4>
 
             <Form className="text-start" onSubmit={handleSubmit}>
               <Form.Group className="mb-3" controlId="loginNICGroup">
