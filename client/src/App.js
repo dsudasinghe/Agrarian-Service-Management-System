@@ -12,6 +12,7 @@ import AdminAdvisors from "./components/admin/adminadvisors";
 import Loans from "./components/admin/loan";
 import Product from "./components/admin/products";
 import Orders from "./components/admin/orders";
+import Landingpage from "./components/landingpage";
 
 function App() {
   const user = localStorage.getItem("token");
@@ -26,7 +27,7 @@ function App() {
         <Route path="/" element={<Navigate replace to="/home" />} />
       )}{" "}
       <Route path="/" element={<Navigate replace to="/login" />} />{" "}
-      <Route path="/home" element={<Dashboard />} />{" "}
+      <Route path="/home" element={<Landingpage />} />{" "}
       {user && (
         <Route path="/login" element={<Navigate replace to="/home" />} />
       )}{" "}
@@ -47,6 +48,7 @@ function App() {
           <Route path="/announcements" element={<Announcements />} />
         )}{" "}
       <Route path="/announcements" element={<Navigate replace to="/home" />} />{" "}
+      <Route path="/productlist" element={<Dashboard />} />{" "}
       <Route path="/eventslist" element={<EventsList />} />{" "}
       <Route path="/announcementslist" element={<AnnouncementsList />} />{" "}
       {getUserData() && getUserData().usertype === 1 && (
@@ -60,8 +62,8 @@ function App() {
         (getUserData().usertype === 1 || getUserData().usertype === 2) && (
           <Route path="/products" element={<Product />} />
         )}{" "}
-      <Route path="/products" element={<Product/>} />{" "}
-      <Route path="/admin/orders" element={<Orders/>} />{" "}
+      <Route path="/products" element={<Product />} />{" "}
+      <Route path="/admin/orders" element={<Orders />} />{" "}
     </Routes>
   );
 }

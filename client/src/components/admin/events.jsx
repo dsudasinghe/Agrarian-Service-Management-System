@@ -17,6 +17,7 @@ import {
 
 import getUrl from "../../utils/routes";
 import axios from "axios";
+import Footer from "./common/footer";
 
 const Events = () => {
   const [list, setList] = useState([]);
@@ -126,18 +127,20 @@ const Events = () => {
     });
   };
 
-  const getPaticipatients=async(eventid)=>{
+  const getPaticipatients = async (eventid) => {
     Notiflix.Loading.standard();
-    let response = await axios.post(getUrl("getEventParticipatients"), { event: eventid });
+    let response = await axios.post(getUrl("getEventParticipatients"), {
+      event: eventid,
+    });
     setPaticipatients(response.data);
     Notiflix.Loading.remove();
     setShowmodal(true);
-  }
+  };
 
   return (
     <>
       <Header />
-      <Container fluid>
+      <Container fluid style={{ marginBottom: "90px" }}>
         <Row className="justify-content-center mt-5">
           <Col
             md={9}
@@ -180,7 +183,7 @@ const Events = () => {
                         className="mx-1"
                         variant="warning"
                         size="sm"
-                        onClick={()=>getPaticipatients(item._id)}
+                        onClick={() => getPaticipatients(item._id)}
                       >
                         Partipatients
                       </Button>
@@ -296,7 +299,7 @@ const Events = () => {
             <Modal.Title>Paticipatients</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-          <Table striped bordered hover>
+            <Table striped bordered hover>
               <thead>
                 <tr>
                   <th>#</th>
@@ -332,6 +335,7 @@ const Events = () => {
           </Modal.Footer>
         </Modal>
       </Container>
+      <Footer></Footer>
     </>
   );
 };

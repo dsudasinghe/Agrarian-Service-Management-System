@@ -15,6 +15,7 @@ import {
 
 import getUrl from "../../utils/routes";
 import axios from "axios";
+import Footer from "./common/footer";
 
 const AdminAdvisors = () => {
   const [list, setList] = useState([]);
@@ -109,10 +110,14 @@ const AdminAdvisors = () => {
       },
       allowOutsideClick: () => !Swal.isLoading(),
     }).then(async (replytext) => {
-      if(replytext.value!=''){
+      if (replytext.value != "") {
         try {
           Notiflix.Loading.standard();
-          await axios.post(getUrl("replyQuestion"), {id:idRecord,reply:replytext.value,staff:getUserData().id});
+          await axios.post(getUrl("replyQuestion"), {
+            id: idRecord,
+            reply: replytext.value,
+            staff: getUserData().id,
+          });
           setError({
             message: "Reply Processed Successfully",
             color: "success",
@@ -139,7 +144,7 @@ const AdminAdvisors = () => {
   return (
     <>
       <Header />
-      <Container fluid>
+      <Container fluid style={{ marginBottom: "90px" }}>
         <Row className="justify-content-center mt-5">
           <Col
             md={9}
@@ -151,6 +156,8 @@ const AdminAdvisors = () => {
               <thead>
                 <tr>
                   <th>#</th>
+                  {/*<th>NIC</th>
+                  <th>Name</th>*/}
                   <th>Question</th>
                   <th>Answer</th>
 
@@ -169,6 +176,8 @@ const AdminAdvisors = () => {
                 {list.map((item, index) => (
                   <tr key={item._id}>
                     <td>{index + 1}</td>
+                    {/*<td>{item.user}</td>
+                    <td>{item.name}</td>*/}
                     <td>{item.message}</td>
                     <td>{item.reply}</td>
                     {(getUserData().usertype == 1 ||
@@ -178,7 +187,7 @@ const AdminAdvisors = () => {
                           className="mx-1"
                           variant="primary"
                           size="sm"
-                          onClick={()=>{
+                          onClick={() => {
                             reply(item._id);
                           }}
                         >
@@ -191,53 +200,56 @@ const AdminAdvisors = () => {
               </tbody>
             </Table>
           </Col>
-          {getUserData().usertype==3 && <Col
-            md={3}
-            sm={12}
-            className="shadow-sm text-success mt-5 p-4 rounded"
-          >
-            <h6 className=" text-success pb-4">Ask Question</h6>
+          {getUserData().usertype == 3 && (
+            <Col
+              md={3}
+              sm={12}
+              className="shadow-sm text-success mt-5 p-4 rounded"
+            >
+              <h6 className=" text-success pb-4">Ask Question</h6>
 
-            <Form className="text-start" onSubmit={handleEnrollment}>
-              <Form.Group className="mb-3" controlId="nameGroup">
-                <Form.Label>Your Question</Form.Label>
-                <Form.Control
-                  onChange={handleChange}
-                  required
-                  placeholder="Enter your question"
-                  name="message"
-                  value={data.message}
-                  as="textarea"
-                  rows={3}
-                />
-              </Form.Group>
-              {error && error.message && (
-                <Alert key={error.color} variant={error.color}>
-                  {error.message}
-                </Alert>
-              )}
-              <Button
-                className="mt-4 w-100"
-                variant={isnew ? "success" : "warning"}
-                type="submit"
-              >
-                {isnew ? "Submit" : "Update"}
-              </Button>
-              <Button
-                className="mt-4 w-100"
-                variant="danger"
-                type="button"
-                onClick={() => {
-                  setData(initialData);
-                  setIsnew(true);
-                }}
-              >
-                Reset
-              </Button>
-            </Form>
-          </Col>}
+              <Form className="text-start" onSubmit={handleEnrollment}>
+                <Form.Group className="mb-3" controlId="nameGroup">
+                  <Form.Label>Your Question</Form.Label>
+                  <Form.Control
+                    onChange={handleChange}
+                    required
+                    placeholder="Enter your question"
+                    name="message"
+                    value={data.message}
+                    as="textarea"
+                    rows={3}
+                  />
+                </Form.Group>
+                {error && error.message && (
+                  <Alert key={error.color} variant={error.color}>
+                    {error.message}
+                  </Alert>
+                )}
+                <Button
+                  className="mt-4 w-100"
+                  variant={isnew ? "success" : "warning"}
+                  type="submit"
+                >
+                  {isnew ? "Submit" : "Update"}
+                </Button>
+                <Button
+                  className="mt-4 w-100"
+                  variant="danger"
+                  type="button"
+                  onClick={() => {
+                    setData(initialData);
+                    setIsnew(true);
+                  }}
+                >
+                  Reset
+                </Button>
+              </Form>
+            </Col>
+          )}
         </Row>
       </Container>
+      <Footer></Footer>
     </>
   );
 };

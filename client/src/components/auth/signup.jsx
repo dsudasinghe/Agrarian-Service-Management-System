@@ -6,12 +6,14 @@ import {
   Breadcrumb,
   Container,
   Row,
+  Image,
   Form,
   Button,
   Alert,
 } from "react-bootstrap";
 import getUrl from "../../utils/routes";
 import axios from "axios";
+import imageLogin from "../../assets/logo2.png";
 
 const Signup = () => {
   const [data, setData] = useState({
@@ -60,7 +62,8 @@ const Signup = () => {
             sm={12}
             className="shadow-sm text-success mt-5 p-4 text-center text-center rounded"
           >
-            <h4 className=" text-success pb-5">EasyAgro User SignUp</h4>
+            <Image src={imageLogin} width="150" height="150" />
+            <h4 className=" text-success pb-5">EASYAGRO USER SIGNUP</h4>
 
             <Form className="text-start" onSubmit={handleSubmit}>
               <Form.Group className="mb-3" controlId="loginNICGroup">

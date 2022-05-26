@@ -4,6 +4,7 @@ import Notiflix from "notiflix";
 import Moment from "moment";
 import Swal from "sweetalert2";
 import { Col, Container, Button, Row } from "react-bootstrap";
+import Footer from "./admin/common/footer";
 
 import getUrl from "../utils/routes";
 import axios from "axios";
@@ -29,21 +30,21 @@ const EventList = () => {
   const enrollUser = async (eventrec) => {
     try {
       Notiflix.Loading.standard();
-      const resp=await axios.post(getUrl("addEnroll"), {
+      const resp = await axios.post(getUrl("addEnroll"), {
         user: getUserData().id,
         nic: getUserData().nic,
         event: eventrec,
       });
-      if(resp.status===200){
-        Swal.fire('You have enrolled with this event');
-      }else{
-        Swal.fire('Already registered with this event');
+      if (resp.status === 200) {
+        Swal.fire("You have enrolled with this event");
+      } else {
+        Swal.fire("Already registered with this event");
       }
       Notiflix.Loading.remove();
     } catch (error) {
       Notiflix.Loading.remove();
-      if(error.status===400){
-        Swal.fire('Already registered with this event');
+      if (error.status === 400) {
+        Swal.fire("Already registered with this event");
       }
     }
   };
@@ -51,7 +52,10 @@ const EventList = () => {
   return (
     <>
       <Header />
-      <Container className="shadow-sm text-success mt-5 p-4 rounded">
+      <Container
+        className="shadow-sm text-success mt-5 p-4 rounded"
+        style={{ marginBottom: "90px" }}
+      >
         <Row className="justify-content-start mt-5">
           <Col md={12} sm={12}>
             <h4 className=" text-success pb-4">Events</h4>
@@ -76,6 +80,7 @@ const EventList = () => {
           ))}
         </Row>
       </Container>
+      <Footer></Footer>
     </>
   );
 };

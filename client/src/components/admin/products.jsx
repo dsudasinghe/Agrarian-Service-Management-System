@@ -15,6 +15,7 @@ import {
 
 import getUrl from "../../utils/routes";
 import axios from "axios";
+import Footer from "./common/footer";
 
 const Products = () => {
   const [list, setList] = useState([]);
@@ -24,18 +25,24 @@ const Products = () => {
     try {
       Notiflix.Loading.standard();
 
-        const formData=new FormData();
-        formData.append('name',data.name);
-        formData.append('description',data.description);
-        formData.append('price',data.price);
-        formData.append('quantity',data.quantity);
-        formData.append('image',image);
-        formData.append('status',data.status);
+      const formData = new FormData();
+      formData.append("name", data.name);
+      formData.append("description", data.description);
+      formData.append("price", data.price);
+      formData.append("quantity", data.quantity);
+      formData.append("image", image);
+      formData.append("status", data.status);
       if (isnew === false) {
-        formData.append('id',recordid);
+        formData.append("id", recordid);
       }
       await axios.post(
-        getUrl(isnew === true ? "addProduct" : (image==='')?"updateProduct":"updateProductWithImage"),
+        getUrl(
+          isnew === true
+            ? "addProduct"
+            : image === ""
+            ? "updateProduct"
+            : "updateProductWithImage"
+        ),
         formData
       );
       setData(initialData);
@@ -134,21 +141,21 @@ const Products = () => {
   const [image, setImage] = useState([]);
 
   const handleImageChange = (e) => {
-      console.log(e.target.files[0]);
+    console.log(e.target.files[0]);
     setImage(e.target.files[0]);
   };
 
   return (
     <>
       <Header />
-      <Container fluid>
+      <Container fluid style={{ marginBottom: "90px" }}>
         <Row className="justify-content-center mt-5">
           <Col
             md={9}
             sm={12}
             className="shadow-sm text-success mt-5 p-4 rounded"
           >
-            <h6 className=" text-success pb-4">Categories List</h6>
+            <h6 className=" text-success pb-4">Product List</h6>
             <Table striped bordered hover>
               <thead>
                 <tr>
@@ -207,7 +214,7 @@ const Products = () => {
             sm={12}
             className="shadow-sm text-success mt-5 p-4 rounded"
           >
-            <h6 className=" text-success pb-4">Add / Update Categories</h6>
+            <h6 className=" text-success pb-4">Add / Update Product</h6>
 
             <Form className="text-start" onSubmit={handleEnrollment}>
               <Form.Group className="mb-3" controlId="nameGroup">
@@ -257,10 +264,7 @@ const Products = () => {
               </Form.Group>
               <Form.Group className="mb-3" controlId="quantityGroup">
                 <Form.Label>Price</Form.Label>
-                <Form.Control
-                  onChange={handleImageChange}
-                  type="file"
-                />
+                <Form.Control onChange={handleImageChange} type="file" />
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="statusGroup">
@@ -302,6 +306,8 @@ const Products = () => {
           </Col>
         </Row>
       </Container>
+
+      <Footer></Footer>
     </>
   );
 };

@@ -13,6 +13,7 @@ import {
   Button,
   Alert,
 } from "react-bootstrap";
+import Footer from "./common/footer";
 
 const Home = () => {
   const [list, setList] = useState([]);
@@ -99,7 +100,7 @@ const Home = () => {
   return (
     <>
       <Header></Header>
-      <Container fluid>
+      <Container fluid style={{ marginBottom: "90px" }}>
         <Row className="justify-content-center mt-5">
           <Col md={12}>
             <Button
@@ -152,6 +153,7 @@ const Home = () => {
           ))}
         </Row>
       </Container>
+      <Footer></Footer>
 
       {product && (
         <Modal show={showModal} onHide={handleClose}>

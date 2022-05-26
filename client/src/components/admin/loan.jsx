@@ -15,6 +15,7 @@ import {
 
 import getUrl from "../../utils/routes";
 import axios from "axios";
+import Footer from "./common/footer";
 
 const Loan = () => {
   const [list, setList] = useState([]);
@@ -142,7 +143,7 @@ const Loan = () => {
   return (
     <>
       <Header />
-      <Container fluid>
+      <Container fluid style={{ marginBottom: "90px" }}>
         <Row className="justify-content-center mt-5">
           <Col
             md={9}
@@ -218,58 +219,61 @@ const Loan = () => {
               </tbody>
             </Table>
           </Col>
-          <Col
-            md={3}
-            sm={12}
-            className="shadow-sm text-success mt-5 p-4 rounded"
-          >
-            <h6 className=" text-success pb-4">Add Loan</h6>
+          {getUserData().usertype == 3 && (
+            <Col
+              md={3}
+              sm={12}
+              className="shadow-sm text-success mt-5 p-4 rounded"
+            >
+              <h6 className=" text-success pb-4">Apply for Loan</h6>
 
-            <Form className="text-start" onSubmit={handleEnrollment}>
-              <Form.Group className="mb-3" controlId="loanamountGroup">
-                <Form.Label>Loan Amount</Form.Label>
-                <Form.Control
-                  onChange={handleChange}
-                  required
-                  name="amount"
-                  value={data.amount}
-                  type="number"
-                  placeholder="Enter Loan name"
-                />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="titleGroup">
-                <Form.Label>Loan Remark</Form.Label>
-                <Form.Control
-                  onChange={handleChange}
-                  required
-                  name="reason"
-                  value={data.reason}
-                  type="text"
-                  placeholder="Enter remark"
-                />
-              </Form.Group>
-              {error && error.message && (
-                <Alert key={error.color} variant={error.color}>
-                  {error.message}
-                </Alert>
-              )}
-              <Button className="mt-4 w-100" variant="success" type="submit">
-                Apply For Loan
-              </Button>
-              <Button
-                className="mt-4 w-100"
-                variant="danger"
-                type="button"
-                onClick={() => {
-                  setData(initialData);
-                }}
-              >
-                Reset
-              </Button>
-            </Form>
-          </Col>
+              <Form className="text-start" onSubmit={handleEnrollment}>
+                <Form.Group className="mb-3" controlId="loanamountGroup">
+                  <Form.Label>Loan Amount</Form.Label>
+                  <Form.Control
+                    onChange={handleChange}
+                    required
+                    name="amount"
+                    value={data.amount}
+                    type="number"
+                    placeholder="Enter Loan amount"
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="titleGroup">
+                  <Form.Label>Loan Remark</Form.Label>
+                  <Form.Control
+                    onChange={handleChange}
+                    required
+                    name="reason"
+                    value={data.reason}
+                    type="text"
+                    placeholder="Enter remark"
+                  />
+                </Form.Group>
+                {error && error.message && (
+                  <Alert key={error.color} variant={error.color}>
+                    {error.message}
+                  </Alert>
+                )}
+                <Button className="mt-4 w-100" variant="success" type="submit">
+                  Apply For Loan
+                </Button>
+                <Button
+                  className="mt-4 w-100"
+                  variant="danger"
+                  type="button"
+                  onClick={() => {
+                    setData(initialData);
+                  }}
+                >
+                  Reset
+                </Button>
+              </Form>
+            </Col>
+          )}
         </Row>
       </Container>
+      <Footer></Footer>
     </>
   );
 };

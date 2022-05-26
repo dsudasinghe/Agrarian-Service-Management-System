@@ -15,6 +15,7 @@ import {
 
 import getUrl from "../../utils/routes";
 import axios from "axios";
+import Footer from "./common/footer";
 
 const Categories = () => {
   const [list, setList] = useState([]);
@@ -24,10 +25,13 @@ const Categories = () => {
     try {
       console.log(data);
       Notiflix.Loading.standard();
-      if(isnew===false){
-        data['id']=recordid;
+      if (isnew === false) {
+        data["id"] = recordid;
       }
-      await axios.post(getUrl((isnew===true)?"addCategory":"updateCategory"), data);
+      await axios.post(
+        getUrl(isnew === true ? "addCategory" : "updateCategory"),
+        data
+      );
       setData(initialData);
       setIsnew(true);
       setError({
@@ -118,7 +122,7 @@ const Categories = () => {
   return (
     <>
       <Header />
-      <Container fluid>
+      <Container fluid style={{ marginBottom: "90px" }}>
         <Row className="justify-content-center mt-5">
           <Col
             md={9}
@@ -222,7 +226,7 @@ const Categories = () => {
                 className="mt-4 w-100"
                 variant="danger"
                 type="button"
-                onClick={()=>{
+                onClick={() => {
                   setData(initialData);
                   setIsnew(true);
                 }}
@@ -233,6 +237,7 @@ const Categories = () => {
           </Col>
         </Row>
       </Container>
+      <Footer></Footer>
     </>
   );
 };

@@ -15,6 +15,7 @@ import {
 
 import getUrl from "../../utils/routes";
 import axios from "axios";
+import Footer from "./common/footer";
 
 const Users = () => {
   const [list, setList] = useState([]);
@@ -24,10 +25,13 @@ const Users = () => {
     try {
       console.log(data);
       Notiflix.Loading.standard();
-      if(isnew===false){
-        data['id']=recordid;
+      if (isnew === false) {
+        data["id"] = recordid;
       }
-      await axios.post(getUrl((isnew===true)?"addUsers":"updateUsers"), data);
+      await axios.post(
+        getUrl(isnew === true ? "addUsers" : "updateUsers"),
+        data
+      );
       setData(initialData);
       setIsnew(true);
       setError({
@@ -124,7 +128,7 @@ const Users = () => {
   return (
     <>
       <Header />
-      <Container fluid>
+      <Container fluid style={{ marginBottom: "90px" }}>
         <Row className="justify-content-center mt-5">
           <Col
             md={9}
@@ -156,8 +160,14 @@ const Users = () => {
                     <td>{item.name}</td>
                     <td>{item.nic}</td>
                     <td>
-                        <Badge bg="primary">
-                        {{1:'Administrator',2:'Staff User',3:'Farmer / Standard User'}[item.usertype]}
+                      <Badge bg="primary">
+                        {
+                          {
+                            1: "Administrator",
+                            2: "Staff User",
+                            3: "Farmer / Standard User",
+                          }[item.usertype]
+                        }
                       </Badge>
                     </td>
                     <td>
@@ -262,7 +272,7 @@ const Users = () => {
                 className="mt-4 w-100"
                 variant="danger"
                 type="button"
-                onClick={()=>{
+                onClick={() => {
                   setData(initialData);
                   setIsnew(true);
                 }}
@@ -273,6 +283,7 @@ const Users = () => {
           </Col>
         </Row>
       </Container>
+      <Footer></Footer>
     </>
   );
 };

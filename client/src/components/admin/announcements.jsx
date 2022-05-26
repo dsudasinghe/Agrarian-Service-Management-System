@@ -15,6 +15,7 @@ import {
 
 import getUrl from "../../utils/routes";
 import axios from "axios";
+import Footer from "./common/footer";
 
 const Announcement = () => {
   const [list, setList] = useState([]);
@@ -106,7 +107,9 @@ const Announcement = () => {
       confirmButtonText: "Yes",
     }).then(async (result) => {
       Notiflix.Loading.standard();
-      let response = await axios.post(getUrl("getAnnouncement"), { id: record });
+      let response = await axios.post(getUrl("getAnnouncement"), {
+        id: record,
+      });
       if (response.status === 200) {
         setIsnew(false);
         setRecordid(response.data._id);
@@ -123,7 +126,7 @@ const Announcement = () => {
   return (
     <>
       <Header />
-      <Container fluid>
+      <Container fluid style={{ marginBottom: "90px" }}>
         <Row className="justify-content-center mt-5">
           <Col
             md={9}
@@ -189,22 +192,22 @@ const Announcement = () => {
 
             <Form className="text-start" onSubmit={handleEnrollment}>
               <Form.Group className="mb-3" controlId="nameGroup">
-                <Form.Label>Event Name</Form.Label>
+                <Form.Label>Announcement Title</Form.Label>
                 <Form.Control
                   onChange={handleChange}
                   required
                   name="title"
                   value={data.title}
                   type="text"
-                  placeholder="Enter event title"
+                  placeholder="Enter announcement title"
                 />
               </Form.Group>
               <Form.Group className="mb-3" controlId="descriptionGroup">
-                <Form.Label>Description</Form.Label>
+                <Form.Label>Content</Form.Label>
                 <Form.Control
                   onChange={handleChange}
                   required
-                  placeholder="Enter event remark"
+                  placeholder="Enter announcement content"
                   name="description"
                   value={data.description}
                   as="textarea"
@@ -250,6 +253,7 @@ const Announcement = () => {
           </Col>
         </Row>
       </Container>
+      <Footer></Footer>
     </>
   );
 };
