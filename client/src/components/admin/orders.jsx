@@ -72,6 +72,7 @@ const Categories = () => {
                 <tr>
                   <th>#</th>
                   <th>Reference</th>
+                  <th>Delivery Address</th>
                   <th>Total</th>
                   <th>Actions</th>
                 </tr>
@@ -88,6 +89,7 @@ const Categories = () => {
                   <tr key={item._id}>
                     <td>{index + 1}</td>
                     <td>{item.ref}</td>
+                    <td>{item.address}</td>
                     <td>{item.total}</td>
                     <td>
                       <Button

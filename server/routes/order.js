@@ -22,6 +22,7 @@ router.post("/add", async (req, resp) => {
       ref: ref,
       user: req.body.user,
       products: req.body.cart,
+      address: req.body.address,
       status: 2,
     }).save();
 
@@ -48,7 +49,7 @@ router.post("/add", async (req, resp) => {
       
       <a href=# style="background: green; text-decoration: none; color: white; padding: 10px 20px; margin: 10px 0; display: inline-block;">Your (order ${ref}) of total (LKR ${req.body.total}) has been recieved and deliever with in 7 days</a>
   
-      <p>if you have a qustion regaring the order, please let us know at easyagroagrarian@gmail.com</p>
+      <p>if you have a question regarding the order, please let us know at easyagroagrarian@gmail.com</p>
   
       
       </div>`

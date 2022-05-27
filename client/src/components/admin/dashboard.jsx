@@ -225,7 +225,7 @@ const Home = () => {
         </Modal.Footer>
       </Modal>
 
-      <Modal show={showPaymentModal} onHide={handleClose}>
+      <Modal show={showPaymentModal} onHide={handleCheckoutClose}>
         <Modal.Header closeButton>
           <Modal.Title>Payment</Modal.Title>
         </Modal.Header>
@@ -233,6 +233,14 @@ const Home = () => {
           <Form.Group className="mb-3" controlId="ownerNameGroup">
             <Form.Label>Owner Name</Form.Label>
             <Form.Control required type="text" placeholder="Enter owner name" />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="deliveryAddressGroup">
+            <Form.Label>Delivery Address</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              placeholder="Enter delivery address"
+            />
           </Form.Group>
           <Form.Group className="mb-3" controlId="cardNumberGroup">
             <Form.Label>Card Number</Form.Label>
@@ -270,6 +278,7 @@ const Home = () => {
                 cart: localStorage.getItem("cart"),
                 user: getUserData().id,
                 total: cartFullTotal,
+                address: "test",
               });
               localStorage.setItem("cart", JSON.stringify([]));
               Notiflix.Loading.remove();
