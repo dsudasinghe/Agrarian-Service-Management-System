@@ -14,6 +14,7 @@ import {
   Alert,
 } from "react-bootstrap";
 import Footer from "./common/footer";
+import Swal from "sweetalert2";
 
 const Home = () => {
   const [list, setList] = useState([]);
@@ -75,7 +76,7 @@ const Home = () => {
       productsCart.push(productObj);
     }
     localStorage.setItem("cart", JSON.stringify(productsCart));
-
+    Swal.fire("Item Added to the cart.");
     console.log(productsCart);
   };
   const handleCartModalClose = () => {

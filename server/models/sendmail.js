@@ -10,16 +10,16 @@ async function sendMailNow(to, subject, message) {
     port: 587,
     secure: false,
     auth: {
-      user: "sudasinghetrade@gmail.com",
-      pass: "lahiru09",
+      user: "easyagroagrarian@gmail.com",
+      pass: "easyagro123",
     },
   });
 
   let info = await transporter.sendMail({
-    from: "sudasinghetrade@gmail.com",
+    from: "easyagroagrarian@gmail.com",
     to: to,
     subject: subject,
-    text: message,
+    html: message,
   });
 
   console.log("Message sent: %s", info.messageId);
