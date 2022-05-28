@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { Orders, validate } = require("../models/order");
 const { Product, validate1 } = require("../models/product");
 const { User, validate2 } = require("../models/user");
-const SendMail = require("../models/sendmail");
+const SendMail = require("../middlewares/sendmail");
 
 router.post("/add", async (req, resp) => {
   try {

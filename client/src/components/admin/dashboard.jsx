@@ -139,7 +139,7 @@ const Home = () => {
                 }}
                 src={require("../../../../server/images/" + item.image)}
               />
-              <h6>{item.name}</h6>
+              <h6 style={{ marginTop: "20px" }}>{item.name}</h6>
               <p className="text-danger">LKR {item.price}</p>
               <h6>{item.quantity} Available</h6>
               <Button
@@ -170,7 +170,7 @@ const Home = () => {
             <p>{product.description}</p>
 
             <p className="text-primary">{product.quantity} Available</p>
-            <h4 className="text-danger">{product.price}</h4>
+            <h4 className="text-danger">LKR {product.price}</h4>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>

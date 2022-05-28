@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { EventEnroll } = require("../models/event_enroll");
-const SendMail = require("../models/sendmail");
+const SendMail = require("../middlewares/sendmail");
 const { User, validate2 } = require("../models/user");
 const { Events, validate } = require("../models/event");
 
@@ -31,10 +31,10 @@ router.post("/enroll", async (req, resp) => {
     if (enroll) {
       SendMail(
         userData.email,
-        "Event Enroll",
+        "Event Enrollment",
         `<div style="max-width: 700px; margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">
       <h2 style="text-align: center; text-transform: uppercase;color: teal;">You have enroll with ${eventData.title}</h2>
-      <p>Thank you for using EasyAgro web application to shop online.
+      <p>Thank you for enrolling with this event.
       <br>
       
       </p>
