@@ -278,7 +278,7 @@ const Home = () => {
                 cart: localStorage.getItem("cart"),
                 user: getUserData().id,
                 total: cartFullTotal,
-                address: "test",
+                address: "No 211, Madagampitiya, Naiwala",
               });
               localStorage.setItem("cart", JSON.stringify([]));
               Notiflix.Loading.remove();

@@ -157,7 +157,7 @@ const Loan = () => {
                   <th>#</th>
                   <th>User</th>
                   <th>Reason</th>
-                  <th>Amount</th>
+                  <th>Amount(LKR)</th>
                   <th>Status</th>
                   {(getUserData().usertype == 1 ||
                     getUserData().usertype == 2) && <th>Actions</th>}

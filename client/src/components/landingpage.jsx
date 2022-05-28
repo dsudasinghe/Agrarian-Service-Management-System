@@ -3,6 +3,7 @@ import { Container, Row, Image, Col } from "react-bootstrap";
 import Header from "./admin/common/header";
 import Footer from "./admin/common/footer";
 import image from "../assets/landing.jpg";
+//import Map from "./admin/map";
 
 const Landingpage = () => {
   return (
@@ -42,7 +43,11 @@ const Landingpage = () => {
           <Col className="shadow-sm text-secondary mt-5 p-4 rounded">
             <h6>Apply for Loans.</h6>
           </Col>
-        </Row>*/}
+        </Row> AIzaSyBheNEtrngM3cbowGS3tLPwoBXlswmmSb0
+*/}
+        {/*<Container style={{ width: "100px", hight: "100px" }}>
+          <Map></Map>
+        </Container>*/}
       </Container>
       <Footer></Footer>
     </>

@@ -142,6 +142,7 @@ const Users = () => {
                   <th>#</th>
                   <th>Name</th>
                   <th>NIC</th>
+                  <th>E-mail</th>
                   <th>Usertype</th>
                   <th>Actions</th>
                 </tr>
@@ -158,7 +159,9 @@ const Users = () => {
                   <tr key={item._id}>
                     <td>{index + 1}</td>
                     <td>{item.name}</td>
+
                     <td>{item.nic}</td>
+                    <td>{item.email}</td>
                     <td>
                       <Badge bg="primary">
                         {
