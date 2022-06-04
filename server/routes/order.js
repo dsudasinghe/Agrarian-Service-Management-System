@@ -78,4 +78,13 @@ router.post("/list", async (req, resp) => {
   }
 });
 
+router.post("/delete", async (req, resp) => {
+  try {
+    await Orders.find({ _id: req.body.id }).remove();
+    return resp.status(200).send({ message: "Successfully Deleted" });
+  } catch (error) {
+    return resp.status(500).send({ message: error.message });
+  }
+});
+
 module.exports = router;

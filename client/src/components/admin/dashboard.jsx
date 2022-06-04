@@ -15,6 +15,7 @@ import {
 } from "react-bootstrap";
 import Footer from "./common/footer";
 import Swal from "sweetalert2";
+import { PayPalButton } from "react-paypal-button-v2";
 
 const Home = () => {
   const [list, setList] = useState([]);
@@ -23,6 +24,7 @@ const Home = () => {
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [product, setProduct] = useState(null);
   const [cartFullTotal, setCartFullTotal] = useState(0);
+  const [shipping, setShipping] = useState("");
 
   const getList = async () => {
     Notiflix.Loading.standard("Loading Products");
@@ -76,7 +78,10 @@ const Home = () => {
       productsCart.push(productObj);
     }
     localStorage.setItem("cart", JSON.stringify(productsCart));
-    Swal.fire("Item Added to the cart.");
+    Swal.fire({
+      icon: "success",
+      title: "Product Added to the cart.",
+    });
     console.log(productsCart);
   };
   const handleCartModalClose = () => {
@@ -209,7 +214,7 @@ const Home = () => {
                   <td>{item.name}</td>
                   <td>{item.price}</td>
                   <td>{item.cart_qty}</td>
-                  <td>{item.price * item.cart_qty}</td>
+                  <td>{item.price * item.cart_qty} LKR</td>
                 </tr>
               ))}
             </tbody>
@@ -218,6 +223,15 @@ const Home = () => {
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCartModalClose}>
             Close
+          </Button>
+          <Button
+            variant="danger"
+            onClick={() => {
+              localStorage.setItem("cart", JSON.stringify([]));
+              handleCartModalClose();
+            }}
+          >
+            Clear Cart
           </Button>
           <Button variant="primary" onClick={handleCheckout}>
             Checkout ({cartFullTotal})
@@ -230,19 +244,24 @@ const Home = () => {
           <Modal.Title>Payment</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form.Group className="mb-3" controlId="ownerNameGroup">
+          {/*<Form.Group className="mb-3" controlId="ownerNameGroup">
             <Form.Label>Owner Name</Form.Label>
             <Form.Control required type="text" placeholder="Enter owner name" />
-          </Form.Group>
+          </Form.Group>*/}
           <Form.Group className="mb-3" controlId="deliveryAddressGroup">
             <Form.Label>Delivery Address</Form.Label>
             <Form.Control
               required
               type="text"
               placeholder="Enter delivery address"
+              onChange={(e) => {
+                setShipping(e.target.value);
+                console.log(shipping);
+              }}
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="cardNumberGroup">
+        </Modal.Body>
+        {/* <Form.Group className="mb-3" controlId="cardNumberGroup">
             <Form.Label>Card Number</Form.Label>
             <Form.Control
               required
@@ -266,28 +285,67 @@ const Home = () => {
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCheckoutClose}>
             Close
-          </Button>
-          <Button
-            variant="primary"
-            onClick={async () => {
+          </Button>*/}
+        {/* {transaction && (
+          <Modal.Footer>
+            <Button
+              variant="primary"
+              onClick={async () => {
+                handleCheckoutClose();
+
+                Notiflix.Loading.standard("Payment Processing");
+
+                await axios.post(getUrl("addOrder"), {
+                  cart: localStorage.getItem("cart"),
+                  user: getUserData().id,
+                  total: cartFullTotal,
+                  address: shipping,
+                });
+                localStorage.setItem("cart", JSON.stringify([]));
+                Notiflix.Loading.remove();
+                getList();
+              }}
+            >
+              Pay
+            </Button>
+          </Modal.Footer>
+        )}*/}
+        <Container>
+          <PayPalButton
+            amount={(cartFullTotal / 360).toFixed(2)}
+            shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
+            onSuccess={async (details) => {
+              //alert(
+              // "Transaction completed by " + details.payer.name.given_name
+              //);
+              Swal.fire({
+                icon: "warning",
+                title:
+                  "Transaction completed by " + details.payer.name.given_name,
+              });
               handleCheckoutClose();
-
               Notiflix.Loading.standard("Payment Processing");
-
               await axios.post(getUrl("addOrder"), {
                 cart: localStorage.getItem("cart"),
                 user: getUserData().id,
                 total: cartFullTotal,
-                address: "No 211, Madagampitiya, Naiwala",
+                address: shipping,
               });
               localStorage.setItem("cart", JSON.stringify([]));
               Notiflix.Loading.remove();
               getList();
+              Swal.fire({
+                icon: "success",
+                title: "Payment Succuss! ", //+ details.payer.name.given_name,
+              });
             }}
-          >
-            Pay
-          </Button>
-        </Modal.Footer>
+            options={{
+              clientId:
+                "AWSlYfZ8E8WQJ3zhbEEVxCEkcADqV0E_L1wcydgijdeWJqCOGN31zVXXQ4ZPOVO3uKlhnMsqjhOPuUvF",
+              currency: "USD",
+            }}
+          />
+        </Container>
       </Modal>
     </>
   );

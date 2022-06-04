@@ -56,6 +56,20 @@ const Categories = () => {
     setShow(false);
   };
 
+  const handleDelete = async (record) => {
+    Swal.fire({
+      title: "Are you sure to delete this record",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+    }).then(async (result) => {
+      Notiflix.Loading.standard();
+      await axios.post(getUrl("orderDelete"), { id: record });
+      Notiflix.Loading.remove();
+      getList();
+    });
+  };
+
   return (
     <>
       <Header />
@@ -100,6 +114,17 @@ const Categories = () => {
                       >
                         View
                       </Button>
+                      {(getUserData().usertype == 1 ||
+                        getUserData().usertype == 2) && (
+                        <Button
+                          className="mx-1"
+                          variant="danger"
+                          size="sm"
+                          onClick={() => handleDelete(item._id)}
+                        >
+                          Clear
+                        </Button>
+                      )}
                     </td>
                   </tr>
                 ))}

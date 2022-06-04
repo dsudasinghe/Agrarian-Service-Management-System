@@ -188,30 +188,38 @@ const Loan = () => {
                     {(getUserData().usertype == 1 ||
                       getUserData().usertype == 2) && (
                       <td>
-                        <Button
-                          className="mx-1"
-                          variant="primary"
-                          size="sm"
-                          onClick={() => handleApprove(item._id, item.user)}
-                        >
-                          Approve
-                        </Button>
-                        <Button
-                          className="mx-1"
-                          variant="primary"
-                          size="sm"
-                          onClick={() => handleReject(item._id, item.user)}
-                        >
-                          Reject
-                        </Button>
-                        <Button
-                          className="mx-1"
-                          variant="danger"
-                          size="sm"
-                          onClick={() => handleDelete(item._id)}
-                        >
-                          Delete
-                        </Button>
+                        <Container>
+                          <Row style={{ marginBottom: "5px" }}>
+                            <Button
+                              className="mx-1"
+                              variant="primary"
+                              size="sm"
+                              onClick={() => handleApprove(item._id, item.user)}
+                            >
+                              Approve
+                            </Button>
+                          </Row>
+                          <Row style={{ marginBottom: "5px" }}>
+                            <Button
+                              className="mx-1"
+                              variant="secondary"
+                              size="sm"
+                              onClick={() => handleReject(item._id, item.user)}
+                            >
+                              Reject
+                            </Button>
+                          </Row>
+                          <Row>
+                            <Button
+                              className="mx-1"
+                              variant="danger"
+                              size="sm"
+                              onClick={() => handleDelete(item._id)}
+                            >
+                              Delete
+                            </Button>
+                          </Row>
+                        </Container>
                       </td>
                     )}
                   </tr>
